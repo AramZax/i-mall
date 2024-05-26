@@ -3,6 +3,8 @@ import { CgShoppingCart } from "react-icons/cg";
 import { AiOutlineLike } from "react-icons/ai";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { useUserWishBasketSection } from "./useUserWishBasketSection";
+import SignInDropDown from "./components/signInDropDown/SignInDropDown";
+import DropDownHeader from "./components/dropDown/DropDownHeader";
 
 const UserWishBAsketSection = ({
   userBasketCount,
@@ -10,8 +12,15 @@ const UserWishBAsketSection = ({
   userWishCount,
   saveUserWish,
   handleClickBasket,
+  navigate,
 }) => {
-  const { menuBurger, handleOpenMenuBurger } = useUserWishBasketSection();
+  const {
+    handleLogAuth,
+    handleOpenMenuBurger,
+    modalRef,
+    checkUserRegister,
+    menuBurger,
+  } = useUserWishBasketSection(navigate);
 
   return (
     <div className="header-basket-section">
@@ -31,11 +40,25 @@ const UserWishBAsketSection = ({
           <span>{userWishCount?.length || saveUserWish?.length} Wish</span>
         )}
       </div>
-      <button onClick={handleOpenMenuBurger}>
+      <button onClick={handleOpenMenuBurger} >
         <RxHamburgerMenu style={{ fontSize: 24, color: "white" }} />
       </button>
 
-      {menuBurger && <div className="header-menu-burger-wrapper"></div>}
+      {menuBurger && checkUserRegister?.email ? (
+        <SignInDropDown
+          modalRef={modalRef}
+          navigate={navigate}
+          handleLogAuth={handleLogAuth}
+        />
+      ) : (
+        menuBurger && (
+          <DropDownHeader
+            modalRef={modalRef}
+            navigate={navigate}
+            checkUserRegister={checkUserRegister}
+          />
+        )
+      )}
     </div>
   );
 };
