@@ -16,7 +16,6 @@ export const useHeader = () => {
   const userWishCount = useSelector(count);
   const userBasketCount = useSelector(userBasket);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const {
     register,

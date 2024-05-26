@@ -39,6 +39,7 @@ const Header = () => {
         userWishCount={userWishCount}
         saveUserWish={saveUserWish}
         handleClickBasket={handleClickBasket}
+        navigate={navigate}
       />
       <RegisterModal
         registerModal={registerModal}
